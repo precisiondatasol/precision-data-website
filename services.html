@@ -293,27 +293,56 @@
           { name: "Formula Help", desc: "Describe the calculation in plain words and get a working Excel or Google Sheets formula back, with a short explanation of what each part does. No more hunting through help forums or guessing at a SUMIFS: we write it, test it on your real sheet, and leave a note beside it so your team can reuse it.", tools: ["Excel formulas", "Google Sheets formulas", "Plain language in, formula out", "Tested on your data"] }
         ];
         var SVC_FIT = [
-          "scattered spreadsheets, duplicate records, and information that needs one consistent source.",
-          "deadlines, missing items, and program performance that need to be easier to follow.",
-          "key metrics that need to sit together so trends and progress are easier to see.",
-          "survey responses, feedback, attendance, or service data that need clear summaries.",
-          "recurring reports, approvals, reminders, or document workflows that need streamlining.",
-          "a repetitive task that off-the-shelf systems do not handle well.",
-          "records that need to be easier to maintain, connect, and report.",
-          "your team needs practical support, walkthroughs, and documentation for ongoing use.",
-          "leaders are waiting for a rebuilt spreadsheet instead of seeing current numbers in one place.",
-          "recurring reports, approvals, reminders, or document steps that should run the same way every time.",
-          "data is being retyped between forms, trackers, and dashboards.",
-          "you need to see what is due, what is missing, and what needs attention before it is late.",
-          "agents, trackers, and dashboards need walkthroughs, documentation, and upkeep as things change.",
-          "you can describe the calculation in plain words and want the formula written and tested on your real sheet."
+          "your event list lives in three spreadsheets, the same client shows up twice, and nobody is sure which copy is right.",
+          "you owe recurring program reports and want deadlines, missing items, and audit summaries in one tracker instead of a memory test.",
+          "your key numbers sit in five different files and you want trends and progress on one screen your team can share.",
+          "you have survey responses, feedback, or attendance sheets piling up and need the short version your team can act on.",
+          "your team rebuilds the same report, approval, or reminder by hand every week inside Excel and Microsoft 365.",
+          "you keep doing the same fiddly task in a spreadsheet because the software you bought almost, but does not quite, do it.",
+          "your records are scattered across forms, inboxes, and spreadsheets and need one structured home that stays easy to maintain.",
+          "your team uses the tools every day but the know-how lives in one person&rsquo;s head, and you want walkthroughs and documentation instead.",
+          "leadership keeps asking for numbers that only exist after someone rebuilds a spreadsheet, and you want one live view instead.",
+          "the same reports, approvals, and reminders run every week and one missed step turns into a scramble.",
+          "your people retype the same information from a form into a tracker into a dashboard, and errors sneak in between the copies.",
+          "deadlines live in email threads and sticky notes, and you want one list that shows what is due and what is missing before it is late.",
+          "your trackers and dashboards work today, but nobody owns keeping them current as people and numbers change.",
+          "you know exactly what the number should be, you just do not want to spend your evening guessing at a SUMIFS to get it."
+        ];
+        var SVC_VIEW_TITLES = [
+          "Event list: before and after",
+          "Program report tracker",
+          "Catering week dashboard",
+          "Post-event survey summary",
+          "Event sheet, automated",
+          "Thursday tidy-up script",
+          "Events database",
+          "Working session plan",
+          "Report pack: November",
+          "Friday report workflow",
+          "Connected tools",
+          "Deadline list",
+          "Care plan: November",
+          "Formula Help"
+        ];
+        var SVC_VIEWS = [
+          "<div class='gv-ba'><div><span class='gv-ba-tag'>Before</span><table class='gv-table'><tbody><tr><td>garcia, J.</td><td>80 guests</td></tr><tr><td>Garcia wedding</td><td>120 guests</td></tr><tr><td>GARCIA WEDDING</td><td>date blank</td></tr></tbody></table></div><div class='gv-arrow'>&rarr;</div><div><span class='gv-ba-tag good'>After</span><table class='gv-table'><tbody><tr><td>Garcia wedding</td><td>120 guests</td></tr><tr><td>Sat, Nov 14</td><td>Deposit paid</td></tr><tr><td>Delgado reunion</td><td>60 guests</td></tr></tbody></table></div></div><div class='gv-note'>The three Garcia entries were one event typed three ways. Merged into a single row, with names, dates, and guest counts written the same way everywhere.</div>",
+          "<div class='gv-row'><span class='gv-main'><b>Monthly program report</b><span>Due Nov 15</span></span><span class='gv-pill ok'>Filed</span></div><div class='gv-row'><span class='gv-main'><b>Attendance summary</b><span>2 items still missing</span></span><span class='gv-pill bad'>Missing items</span></div><div class='gv-row'><span class='gv-main'><b>Audit summary</b><span>Draft pulled from the tracker</span></span><span class='gv-pill wait'>In review</span></div><div class='gv-note'>Deadlines, missing items, and program performance in one tracker, so the missing pieces show up while there is still time to fix them.</div>",
+          "<div class='gv-kpis'><div><span>Events this week</span><b>4</b></div><div><span>Guests served</span><b>385</b></div><div><span>Deposits in</span><b>3 of 4</b></div></div><div class='gv-bars'><i style='height:45%'></i><i style='height:62%'></i><i style='height:54%'></i><i style='height:78%'></i><i style='height:96%'></i></div><div class='gv-note'>Elena&rsquo;s week in Power BI, built from her event sheet: bookings, guests, and deposits on one screen instead of five files.</div>",
+          "<div class='svc-hbar'><span>Food</span><i><b style='width:92%'></b></i><em>92%</em></div><div class='svc-hbar'><span>Setup on time</span><i><b style='width:88%'></b></i><em>88%</em></div><div class='svc-hbar'><span>Communication</span><i><b style='width:81%'></b></i><em>81%</em></div><div class='svc-hbar'><span>Would book again</span><i><b style='width:76%'></b></i><em>76%</em></div><div class='gv-note'><b>Takeaway:</b> 64 post-event surveys, one page. Guests love the food; setup timing is the number to watch next month.</div>",
+          "<table class='gv-table'><thead><tr><th>Event</th><th>Guests</th><th class='hl'>Deposit</th><th class='hl'>Reminder</th></tr></thead><tbody><tr><td>Garcia wedding</td><td>120</td><td class='hl'>Paid</td><td class='hl'>Sent</td></tr><tr><td>Office lunch</td><td>45</td><td class='hl'>Due Friday</td><td class='hl'>Scheduled</td></tr></tbody></table><div class='gv-note'>The highlighted columns run themselves: Office Scripts total the sheet and Power Automate sends the reminders. Elena checks the result instead of building it.</div>",
+          "<div class='formula-out'>python tidy_events.py &rarr; 214 rows checked</div><div class='gv-row'><span class='gv-main'><b>Duplicate rows found</b><span>Same event, typed twice</span></span><span class='gv-pill ok'>6 merged</span></div><div class='gv-row'><span class='gv-main'><b>Dates and names fixed</b><span>Written one consistent way</span></span><span class='gv-pill ok'>11 fixed</span></div><div class='gv-row'><span class='gv-main'><b>Clean file written</b><span>events_clean.xlsx, ready to open</span></span><span class='gv-pill wait'>Ready</span></div><div class='gv-note'>A small Python tool for the Thursday tidy-up that off-the-shelf software kept getting wrong.</div>",
+          "<table class='gv-table'><thead><tr><th>Event</th><th>Date</th><th>Guests</th><th>Status</th></tr></thead><tbody><tr><td>Garcia wedding</td><td>Nov 14</td><td>120</td><td>Confirmed</td></tr><tr><td>Delgado reunion</td><td>Nov 21</td><td>60</td><td>Deposit paid</td></tr><tr><td>Office lunch</td><td>Nov 25</td><td>45</td><td>New inquiry</td></tr></tbody></table><div class='gv-note'>One structured table under it all. The inquiry form Elena already sends clients writes straight into it, so every record is ready to maintain, connect, and report.</div>",
+          "<div class='gv-step'><span class='gv-check done'>&#10003;</span><span class='gv-main'><b>Process review</b><span>How the monthly report gets built today, step by step</span></span><span class='gv-pill ok'>Done</span></div><div class='gv-step'><span class='gv-check turn'>2</span><span class='gv-main'><b>Hands-on rebuild</b><span>The event tracker, rebuilt together on Elena&rsquo;s real sheet</span></span><span class='gv-pill wait'>Next session</span></div><div class='gv-step'><span class='gv-check turn'>3</span><span class='gv-main'><b>Walkthrough and notes</b><span>A one-page guide the team keeps, in their words</span></span><span class='gv-pill wait'>To follow</span></div><div class='gv-note'>Practical support on the tools the team already uses, not a lecture: we fix the real work, together, and document it as we go.</div>",
+          "<div class='gv-row'><span class='gv-main'><b>Weekly numbers dashboard</b><span>Every Monday, 8:00 AM</span></span><span class='gv-pill ok'>Sent</span></div><div class='gv-row'><span class='gv-main'><b>Leader view, Power BI</b><span>Current numbers, no rebuild</span></span><span class='gv-pill ok'>Live</span></div><div class='gv-row'><span class='gv-main'><b>Month-end report pack</b><span>Lands Dec 1</span></span><span class='gv-pill wait'>Scheduled</span></div><div class='gv-minibars'><i style='height:40%'></i><i style='height:55%'></i><i style='height:70%'></i><i style='height:96%'></i></div><div class='gv-note'>Leaders open one live view instead of waiting for a rebuilt spreadsheet, and the scheduled pack still lands on time.</div>",
+          "<div class='gv-step'><span class='gv-check done'>&#10003;</span><span class='gv-main'><b>Event sheet closes</b><span>Friday, 5:00 PM</span></span></div><div class='gv-step'><span class='gv-check done'>&#10003;</span><span class='gv-main'><b>Report builds itself</b><span>Totals checked against the source as it runs</span></span></div><div class='gv-step'><span class='gv-check turn'>3</span><span class='gv-main'><b>Elena approves</b><span>Nothing sends before this step</span></span><span class='gv-pill wait'>Your turn</span></div><div class='gv-note'>Recurring reports, approvals, and reminders run the same way every time, and the send always waits for a person.</div>",
+          "<div class='gv-row'><span class='gv-main'><b>Client inquiry form</b><span>Feeds the event tracker, no retyping</span></span><span class='gv-pill ok'>Synced</span></div><div class='gv-row'><span class='gv-main'><b>Event tracker</b><span>Feeds the Power BI dashboard</span></span><span class='gv-pill ok'>Synced</span></div><div class='gv-row'><span class='gv-main'><b>Change log</b><span>Every update recorded for review</span></span><span class='gv-pill wait'>On</span></div><div class='gv-note'>Outlook, Excel, Power BI, and Google Sheets pass the same numbers along, so the dashboard never disagrees with the sheet.</div>",
+          "<div class='gv-row'><span class='gv-main'><b>Health permit renewal</b><span>Due Nov 20</span></span><span class='gv-pill bad'>Missing: certificate</span></div><div class='gv-row'><span class='gv-main'><b>Monthly report</b><span>Due Nov 15</span></span><span class='gv-pill ok'>Ready</span></div><div class='gv-row'><span class='gv-main'><b>Sales tax filing</b><span>Due Dec 1</span></span><span class='gv-pill wait'>In progress</span></div><div class='gv-note'>What is due, what is missing, and what needs attention, in one list with an audit ready export behind it, before anything is late.</div>",
+          "<div class='gv-row'><span class='gv-main'><b>Recorded walkthrough</b><span>Approving a draft, start to finish</span></span><span class='gv-pill ok'>In the folder</span></div><div class='gv-row'><span class='gv-main'><b>Monthly check</b><span>Trackers and dashboards reviewed, Nov 28</span></span><span class='gv-pill ok'>Scheduled</span></div><div class='gv-row'><span class='gv-main'><b>Formulas and automations</b><span>Reviewed as the numbers change</span></span><span class='gv-pill wait'>Next check Dec</span></div><div class='gv-note'>Walkthroughs, documentation, and a standing care plan keep everything current as the team and the numbers change.</div>",
+          "<div class='gv-ask'><span>Elena asked, in plain words</span><b>&ldquo;Add up the guests for every confirmed event in November&rdquo;</b></div><div class='formula-out'>=SUMIFS(C:C, A:A, &quot;November&quot;, D:D, &quot;Confirmed&quot;)</div><div class='gv-note'><b>In plain words:</b> add the guest counts in column C, only on rows where column A says November and column D says Confirmed. Written for her, tested on her real sheet, and left with this note beside it.</div>"
         ];
         var svcList = $("#serviceList"), svcPanels = $("#servicePanels");
         var svcSearch = $("#serviceSearch"), svcCount = $("#serviceCount"), svcEmpty = $("#serviceEmpty");
         var svcButtons = [], svcPanelEls = [], svcHighlightTimer = null;
-        function svcInitials(text) {
-          return text.split(/\s+/).slice(0, 2).map(function (w) { return w.charAt(0); }).join("").toUpperCase();
-        }
         SERVICES.forEach(function (s, i) {
           var b = document.createElement("button");
           b.type = "button"; b.className = "explorer-btn" + (i === 0 ? " active" : "");
@@ -332,35 +361,9 @@
           var chips = p.querySelector(".tool-chips");
           s.tools.forEach(function (t) { var c = document.createElement("span"); c.textContent = t; chips.appendChild(c); });
           var work = p.querySelector(".svc-work");
-          work.innerHTML = "<div class='svc-work-top'><span class='svc-work-dots'><i></i><i></i><i></i></span><span class='svc-work-title'>Service view</span><span class='svc-work-pill'>Panel</span></div><div class='svc-work-body'></div>";
-          var workBody = work.querySelector(".svc-work-body");
-          var head = document.createElement("div");
-          head.className = "svc-work-row svc-work-head";
-          head.innerHTML = "<span>Tool</span><span>View</span><span>Status</span>";
-          workBody.appendChild(head);
-          var viewNames = ["Main", "Detail", "Summary", "Notes"];
-          s.tools.slice(0, 4).forEach(function (t, idx) {
-            var row = document.createElement("div");
-            row.className = "svc-work-row" + (idx === 0 ? " is-main" : "");
-            var tool = document.createElement("span");
-            tool.className = "svc-work-tool";
-            var mark = document.createElement("i");
-            mark.textContent = svcInitials(t);
-            var label = document.createElement("b");
-            label.textContent = t;
-            tool.appendChild(mark); tool.appendChild(label);
-            var view = document.createElement("span");
-            view.textContent = viewNames[idx];
-            var status = document.createElement("span");
-            status.className = "svc-work-status";
-            status.textContent = idx === 0 ? "Open" : "Ready";
-            row.appendChild(tool); row.appendChild(view); row.appendChild(status);
-            workBody.appendChild(row);
-          });
-          var bars = document.createElement("div");
-          bars.className = "svc-work-bars";
-          bars.innerHTML = "<i style='width:74%'></i><i style='width:48%'></i><i style='width:61%'></i>";
-          workBody.appendChild(bars);
+          work.innerHTML = "<div class='svc-work-top'><span class='svc-work-dots'><i></i><i></i><i></i></span><span class='svc-work-title'></span><span class='svc-work-pill'>Sample</span></div><div class='svc-work-body'></div>";
+          work.querySelector(".svc-work-title").textContent = SVC_VIEW_TITLES[i];
+          work.querySelector(".svc-work-body").innerHTML = SVC_VIEWS[i];
           svcPanels.appendChild(p);
           svcPanelEls.push(p);
         });
