@@ -46,7 +46,21 @@
         </section>
         <section class="band" style="padding-top:10px;">
           <div class="wrap">
-            <div class="explorer reveal">
+            <div class="svc-quiz reveal" aria-label="Help me choose a service">
+              <div class="svc-quiz-copy"><span>Help me choose</span><strong>What eats most of your week?</strong></div>
+              <div class="svc-quiz-chips" role="group" aria-label="Choose what takes most of your week">
+                <button type="button" data-svc-quiz="9">My inbox</button>
+                <button type="button" data-svc-quiz="13">My spreadsheets</button>
+                <button type="button" data-svc-quiz="8">My reports</button>
+                <button type="button" data-svc-quiz="11">My deadlines</button>
+              </div>
+            </div>
+            <div class="svc-explorer-head reveal">
+              <div class="svc-explorer-title"><span>Explore the lineup</span><span class="svc-count" id="serviceCount" aria-live="polite">14 of 14</span></div>
+              <label class="svc-search" for="serviceSearch"><span class="svc-search-label">Search services</span><input id="serviceSearch" type="search" placeholder="Search services, try 'formula' or 'dashboard'" autocomplete="off" /></label>
+            </div>
+            <p class="svc-empty" id="serviceEmpty" hidden>No services match that search. Try a tool name like Excel, Power BI, or Power Automate.</p>
+            <div class="explorer reveal" id="serviceExplorer">
               <div class="explorer-list" role="tablist" aria-label="Services list" id="serviceList"></div>
               <div id="servicePanels"></div>
             </div>
@@ -278,31 +292,154 @@
           { name: "Training and Ongoing Upkeep", desc: "Walkthroughs, documentation, and a care plan that keeps agents, trackers, and dashboards current as your team and your numbers change.", tools: ["Walkthroughs", "Documentation", "Care plan"] },
           { name: "Formula Help", desc: "Describe the calculation in plain words and get a working Excel or Google Sheets formula back, with a short explanation of what each part does. No more hunting through help forums or guessing at a SUMIFS: we write it, test it on your real sheet, and leave a note beside it so your team can reuse it.", tools: ["Excel formulas", "Google Sheets formulas", "Plain language in, formula out", "Tested on your data"] }
         ];
+        var SVC_FIT = [
+          "scattered spreadsheets, duplicate records, and information that needs one consistent source.",
+          "deadlines, missing items, and program performance that need to be easier to follow.",
+          "key metrics that need to sit together so trends and progress are easier to see.",
+          "survey responses, feedback, attendance, or service data that need clear summaries.",
+          "recurring reports, approvals, reminders, or document workflows that need streamlining.",
+          "a repetitive task that off-the-shelf systems do not handle well.",
+          "records that need to be easier to maintain, connect, and report.",
+          "your team needs practical support, walkthroughs, and documentation for ongoing use.",
+          "leaders are waiting for a rebuilt spreadsheet instead of seeing current numbers in one place.",
+          "recurring reports, approvals, reminders, or document steps that should run the same way every time.",
+          "data is being retyped between forms, trackers, and dashboards.",
+          "you need to see what is due, what is missing, and what needs attention before it is late.",
+          "agents, trackers, and dashboards need walkthroughs, documentation, and upkeep as things change.",
+          "you can describe the calculation in plain words and want the formula written and tested on your real sheet."
+        ];
         var svcList = $("#serviceList"), svcPanels = $("#servicePanels");
+        var svcSearch = $("#serviceSearch"), svcCount = $("#serviceCount"), svcEmpty = $("#serviceEmpty");
+        var svcButtons = [], svcPanelEls = [], svcHighlightTimer = null;
+        function svcInitials(text) {
+          return text.split(/\s+/).slice(0, 2).map(function (w) { return w.charAt(0); }).join("").toUpperCase();
+        }
         SERVICES.forEach(function (s, i) {
           var b = document.createElement("button");
           b.type = "button"; b.className = "explorer-btn" + (i === 0 ? " active" : "");
           b.setAttribute("role", "tab"); b.setAttribute("aria-selected", i === 0 ? "true" : "false");
+          b.setAttribute("data-service", i);
           b.textContent = s.name;
           b.addEventListener("click", function () { selectService(i); });
           svcList.appendChild(b);
+          svcButtons.push(b);
           var p = document.createElement("div");
           p.className = "explorer-panel" + (i === 0 ? " active" : "");
-          p.innerHTML = "<h3></h3><p></p><h4>Tools we use</h4><div class='tool-chips'></div>";
+          p.innerHTML = "<div class='svc-panel-grid'><div class='svc-panel-copy'><h3></h3><p class='svc-desc'></p><p class='svc-fit'><strong>Good fit if:</strong> <span></span></p><h4>Tools we use</h4><div class='tool-chips'></div><div class='svc-panel-cta'><a class='btn btn-navy btn-small' href='contact.html'>Ask about this service</a></div></div><div class='svc-work' aria-hidden='true'></div></div>";
           p.querySelector("h3").textContent = s.name;
-          p.querySelector("p").textContent = s.desc;
+          p.querySelector(".svc-desc").textContent = s.desc;
+          p.querySelector(".svc-fit span").textContent = SVC_FIT[i];
           var chips = p.querySelector(".tool-chips");
           s.tools.forEach(function (t) { var c = document.createElement("span"); c.textContent = t; chips.appendChild(c); });
-          var cta = document.createElement("div");
-          cta.style.marginTop = "24px";
-          cta.innerHTML = "<a class='btn btn-navy btn-small' href='contact.html'>Ask about this service</a>";
-          p.appendChild(cta);
+          var work = p.querySelector(".svc-work");
+          work.innerHTML = "<div class='svc-work-top'><span class='svc-work-dots'><i></i><i></i><i></i></span><span class='svc-work-title'>Service view</span><span class='svc-work-pill'>Panel</span></div><div class='svc-work-body'></div>";
+          var workBody = work.querySelector(".svc-work-body");
+          var head = document.createElement("div");
+          head.className = "svc-work-row svc-work-head";
+          head.innerHTML = "<span>Tool</span><span>View</span><span>Status</span>";
+          workBody.appendChild(head);
+          var viewNames = ["Main", "Detail", "Summary", "Notes"];
+          s.tools.slice(0, 4).forEach(function (t, idx) {
+            var row = document.createElement("div");
+            row.className = "svc-work-row" + (idx === 0 ? " is-main" : "");
+            var tool = document.createElement("span");
+            tool.className = "svc-work-tool";
+            var mark = document.createElement("i");
+            mark.textContent = svcInitials(t);
+            var label = document.createElement("b");
+            label.textContent = t;
+            tool.appendChild(mark); tool.appendChild(label);
+            var view = document.createElement("span");
+            view.textContent = viewNames[idx];
+            var status = document.createElement("span");
+            status.className = "svc-work-status";
+            status.textContent = idx === 0 ? "Open" : "Ready";
+            row.appendChild(tool); row.appendChild(view); row.appendChild(status);
+            workBody.appendChild(row);
+          });
+          var bars = document.createElement("div");
+          bars.className = "svc-work-bars";
+          bars.innerHTML = "<i style='width:74%'></i><i style='width:48%'></i><i style='width:61%'></i>";
+          workBody.appendChild(bars);
           svcPanels.appendChild(p);
+          svcPanelEls.push(p);
         });
-        function selectService(i) {
-          $$(".explorer-btn").forEach(function (b, j) { b.classList.toggle("active", j === i); b.setAttribute("aria-selected", j === i ? "true" : "false"); });
-          $$(".explorer-panel").forEach(function (p, j) { p.classList.toggle("active", j === i); });
+        function selectService(i, opts) {
+          opts = opts || {};
+          svcButtons.forEach(function (b, j) { b.classList.toggle("active", j === i); b.setAttribute("aria-selected", j === i ? "true" : "false"); });
+          svcPanelEls.forEach(function (p, j) {
+            var isActive = j === i;
+            p.classList.toggle("active", isActive);
+            if (isActive) {
+              p.classList.remove("svc-anim");
+              void p.offsetWidth;
+              p.classList.add("svc-anim");
+              if (opts.highlight) p.classList.add("svc-highlight"); else p.classList.remove("svc-highlight");
+            } else {
+              p.classList.remove("svc-highlight");
+            }
+          });
+          if (opts.highlight) {
+            window.clearTimeout(svcHighlightTimer);
+            svcHighlightTimer = window.setTimeout(function () { if (svcPanelEls[i]) svcPanelEls[i].classList.remove("svc-highlight"); }, 1800);
+          }
         }
+        function svcVisibleButtons() {
+          return svcButtons.filter(function (b) { return !b.classList.contains("svc-hidden"); });
+        }
+        function svcServiceMatches(s, q) {
+          if (!q) return true;
+          return (s.name + " " + s.tools.join(" ")).toLowerCase().indexOf(q) !== -1;
+        }
+        function applyServiceFilter() {
+          var q = svcSearch ? svcSearch.value.trim().toLowerCase() : "";
+          var visible = 0;
+          SERVICES.forEach(function (s, i) {
+            var match = svcServiceMatches(s, q);
+            svcButtons[i].classList.toggle("svc-hidden", !match);
+            if (match) visible++;
+          });
+          if (svcCount) svcCount.textContent = visible + " of " + SERVICES.length;
+          if (svcEmpty) svcEmpty.hidden = visible !== 0;
+          return visible;
+        }
+        function svcCurrentIndex() {
+          var el = document.activeElement;
+          if (el && el.getAttribute && el.getAttribute("data-service")) return parseInt(el.getAttribute("data-service"), 10);
+          for (var i = 0; i < svcButtons.length; i++) if (svcButtons[i].classList.contains("active")) return i;
+          return 0;
+        }
+        function svcArrowMove(ev) {
+          if (ev.key !== "ArrowDown" && ev.key !== "ArrowUp") return;
+          var vis = svcVisibleButtons();
+          if (!vis.length) return;
+          ev.preventDefault();
+          var dir = ev.key === "ArrowDown" ? 1 : -1;
+          var cur = svcCurrentIndex(), pos = -1;
+          vis.forEach(function (b, j) { if (parseInt(b.getAttribute("data-service"), 10) === cur) pos = j; });
+          var nextPos = pos === -1 ? (dir > 0 ? 0 : vis.length - 1) : (pos + dir + vis.length) % vis.length;
+          var target = vis[nextPos];
+          var idx = parseInt(target.getAttribute("data-service"), 10);
+          selectService(idx);
+          target.focus();
+        }
+        if (svcSearch) {
+          svcSearch.addEventListener("input", applyServiceFilter);
+          svcSearch.addEventListener("keydown", svcArrowMove);
+        }
+        svcList.addEventListener("keydown", svcArrowMove);
+        applyServiceFilter();
+        $$("[data-svc-quiz]").forEach(function (chip) {
+          chip.addEventListener("click", function () {
+            var idx = parseInt(chip.getAttribute("data-svc-quiz"), 10);
+            if (isNaN(idx) || idx < 0 || idx >= SERVICES.length) return;
+            $$("[data-svc-quiz]").forEach(function (x) { x.classList.toggle("active", x === chip); });
+            if (svcSearch && svcSearch.value) { svcSearch.value = ""; applyServiceFilter(); }
+            selectService(idx, { highlight: true });
+            if (svcButtons[idx]) svcButtons[idx].focus({ preventScroll: true });
+            if (svcPanelEls[idx]) svcPanelEls[idx].scrollIntoView({ behavior: "smooth", block: "nearest" });
+          });
+        });
 
         
           var svcParam = parseInt(new URLSearchParams(location.search).get("service"), 10);
