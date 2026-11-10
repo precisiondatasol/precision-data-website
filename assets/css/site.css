@@ -915,3 +915,10 @@
       @media (max-width: 1020px) { .prod-grid { grid-template-columns: 1fr; } .get-view { max-width: 560px; } }
       @media (max-width: 700px) { .team-roster { grid-template-columns: 1fr 1fr; } }
       @media (max-width: 460px) { .team-roster { grid-template-columns: 1fr; } .gv-ba { grid-template-columns: 1fr; } .gv-arrow { transform: rotate(90deg); } }
+      /* ---------- services tailored sample views ---------- */
+      .svc-hbar { display: grid; grid-template-columns: 96px minmax(0, 1fr) 36px; align-items: center; gap: 8px; padding: 4.5px 0; font-size: 11.5px; }
+      .svc-hbar span { color: var(--ink); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .svc-hbar i { display: block; height: 7px; background: var(--bg-soft); border-radius: 999px; overflow: hidden; }
+      .svc-hbar i b { display: block; height: 100%; background: var(--blue); border-radius: 999px; }
+      .svc-hbar em { font-style: normal; font-weight: 800; color: var(--ink); text-align: right; }
+      .svc-work-body .formula-out { font-size: 12px; padding: 11px 13px; margin-bottom: 9px; }
