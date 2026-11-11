@@ -94,7 +94,7 @@
       }
       .header-inner {
         max-width: 1180px; margin: 0 auto; padding: 0 24px;
-        display: flex; align-items: center; gap: 28px; min-height: 68px;
+        display: flex; align-items: center; gap: 20px; min-height: 68px;
       }
       .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--navy); flex-shrink: 0; }
       .brand-mark {
@@ -104,10 +104,10 @@
       @media (prefers-color-scheme: dark) { .brand-mark { background: var(--blue); color: #0a141f; } }
       .brand-name { font-weight: 800; font-size: 17px; line-height: 1.15; }
       .brand-name small { display: block; font-weight: 500; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #b9c9dc; }
-      .main-nav { display: flex; gap: 4px; margin-left: auto; align-items: center; }
+      .main-nav { display: flex; gap: 2px; margin-left: auto; align-items: center; flex-shrink: 0; }
       .main-nav button {
         background: none; border: 0; color: #33475e; font-size: 15px; font-weight: 600;
-        padding: 9px 13px; border-bottom: 3px solid transparent;
+        padding: 9px 10px; border-bottom: 3px solid transparent; white-space: nowrap;
       }
       .main-nav button:hover { color: var(--navy); }
       .main-nav button.active { color: var(--navy); border-bottom-color: var(--blue); }
@@ -126,7 +126,7 @@
       .btn-outline-light { border-color: rgba(255,255,255,0.55); color: #fff; background: transparent; }
       .btn-outline-light:hover { border-color: #fff; }
       .btn-small { padding: 9px 16px; font-size: 14px; }
-      .header-cta { margin-left: 10px; }
+      .header-cta { margin-left: 10px; white-space: nowrap; flex-shrink: 0; }
       .menu-toggle {
         display: none; margin-left: auto; background: none; border: 1px solid var(--line-strong);
         color: var(--navy); font-size: 14px; font-weight: 700; padding: 8px 14px;
