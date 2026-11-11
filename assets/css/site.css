@@ -922,3 +922,22 @@
       .svc-hbar i b { display: block; height: 100%; background: var(--blue); border-radius: 999px; }
       .svc-hbar em { font-style: normal; font-weight: 800; color: var(--ink); text-align: right; }
       .svc-work-body .formula-out { font-size: 12px; padding: 11px 13px; margin-bottom: 9px; }
+      /* ---------- home value cards + services comparison ---------- */
+      .value-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+      .value-card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 24px; }
+      .value-card h3 { font-size: 19px; margin-bottom: 8px; }
+      .value-card > p { color: var(--muted); font-size: 15px; line-height: 1.55; }
+      .value-card .get-view { margin-top: 16px; box-shadow: none; }
+      .value-close { margin-top: 26px; background: var(--navy); border-radius: 14px; padding: 32px 28px; text-align: center; }
+      .value-close p { color: #fff; font-size: clamp(19px, 2.6vw, 24px); font-weight: 700; line-height: 1.4; max-width: 660px; margin: 0 auto; }
+      .value-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
+      .compare-scroll { overflow-x: auto; border: 1px solid var(--line-strong); border-radius: 14px; background: var(--panel); }
+      .compare-table { width: 100%; border-collapse: collapse; min-width: 600px; font-size: 15px; }
+      .compare-table th, .compare-table td { text-align: left; padding: 13px 16px; border-bottom: 1px solid var(--line); vertical-align: top; line-height: 1.45; }
+      .compare-table thead th { background: var(--bg-soft); font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); border-bottom: 1px solid var(--line-strong); }
+      .compare-table thead th:last-child { color: var(--navy); }
+      @media (prefers-color-scheme: dark) { .compare-table thead th:last-child { color: var(--ink); } }
+      .compare-table tbody th { font-weight: 700; white-space: nowrap; }
+      .compare-table tbody td:last-child { font-weight: 600; color: var(--ink); }
+      .compare-table tbody tr:last-child th, .compare-table tbody tr:last-child td { border-bottom: 0; }
+      @media (max-width: 860px) { .value-grid { grid-template-columns: 1fr; } }
