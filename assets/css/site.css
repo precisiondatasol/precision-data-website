@@ -1141,3 +1141,6 @@
         .prod-panel.prod-anim .get-view, .prod-panel.prod-anim .get-view * { animation: none !important; }
         .prod-panel .gv-bars i, .prod-panel .gv-minibars i { transition: none; }
       }
+
+/* Formula Help view: wrap the typed formula so the whole line is visible without sideways scrolling (Nov 11, 2026). */
+#serviceExplorer .svc-work-body .formula-out { white-space: pre-wrap; word-break: break-word; overflow-x: visible; }
