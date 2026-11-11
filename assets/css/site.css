@@ -941,3 +941,32 @@
       .compare-table tbody td:last-child { font-weight: 600; color: var(--ink); }
       .compare-table tbody tr:last-child th, .compare-table tbody tr:last-child td { border-bottom: 0; }
       @media (max-width: 860px) { .value-grid { grid-template-columns: 1fr; } }
+      /* ---------- services declutter: calmer panels, list, rhythm ---------- */
+      #serviceList .explorer-btn { padding: 11px 16px; font-size: 14.5px; }
+      #servicePanels .explorer-panel { padding: 27px 30px; }
+      #serviceExplorer .svc-panel-grid { gap: 22px; }
+      #serviceExplorer .svc-work-top { padding: 6px 10px; }
+      #serviceExplorer .svc-work-body { padding: 9px 10px 10px; font-size: 12.5px; }
+      #serviceExplorer .svc-works { font-size: 13.5px; color: var(--muted); margin-bottom: 2px; }
+      #serviceExplorer .svc-works strong { color: var(--ink); font-weight: 700; }
+      #serviceExplorer .svc-panel-cta { margin-top: 16px; }
+      section.band:has(#serviceExplorer) { padding-bottom: 26px; }
+      section.band:has(.compare-table) { padding-top: 26px !important; padding-bottom: 26px !important; }
+      @media (max-width: 700px) { #servicePanels .explorer-panel { padding: 22px 20px; } }
+      /* ---------- services motion: staggered sample views, growing bars ---------- */
+      @keyframes svcItemIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+      #serviceExplorer .explorer-panel.active .svc-work-body > * { animation: svcItemIn .38s ease both; }
+      #serviceExplorer .explorer-panel.active .svc-work-body > *:nth-child(2) { animation-delay: .05s; }
+      #serviceExplorer .explorer-panel.active .svc-work-body > *:nth-child(3) { animation-delay: .10s; }
+      #serviceExplorer .explorer-panel.active .svc-work-body > *:nth-child(4) { animation-delay: .15s; }
+      #serviceExplorer .explorer-panel.active .svc-work-body > *:nth-child(5) { animation-delay: .20s; }
+      #serviceExplorer .explorer-panel.active .svc-work-body > *:nth-child(6) { animation-delay: .25s; }
+      #serviceExplorer .explorer-panel.active .gv-ba > * { animation: svcItemIn .38s ease both; }
+      #serviceExplorer .explorer-panel.active .gv-ba > *:nth-child(2) { animation-delay: .12s; }
+      #serviceExplorer .explorer-panel.active .gv-ba > *:nth-child(3) { animation-delay: .19s; }
+      #serviceExplorer .gv-bars i, #serviceExplorer .gv-minibars i { transition: height .55s ease; }
+      #serviceExplorer .svc-hbar i b { transition: width .55s ease; }
+      @media (prefers-reduced-motion: reduce) {
+        #serviceExplorer .explorer-panel.active .svc-work-body > *, #serviceExplorer .explorer-panel.active .gv-ba > * { animation: none; }
+        #serviceExplorer .gv-bars i, #serviceExplorer .gv-minibars i, #serviceExplorer .svc-hbar i b { transition: none; }
+      }
