@@ -970,3 +970,174 @@
         #serviceExplorer .explorer-panel.active .svc-work-body > *, #serviceExplorer .explorer-panel.active .gv-ba > * { animation: none; }
         #serviceExplorer .gv-bars i, #serviceExplorer .gv-minibars i, #serviceExplorer .svc-hbar i b { transition: none; }
       }
+      /* ---------- services signature animations: one move per deliverable ---------- */
+      @keyframes svcSigRise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+      @keyframes svcSigPop { 0% { opacity: 0; transform: scale(.3); } 60% { opacity: 1; transform: scale(1.18); } 100% { opacity: 1; transform: scale(1); } }
+      @keyframes svcSigStamp { 0% { opacity: 0; transform: scale(1.7); } 55% { opacity: 1; transform: scale(.93); } 78% { transform: scale(1.05); } 100% { opacity: 1; transform: scale(1); } }
+      @keyframes svcMergeDip { 0% { opacity: 1; } 45% { opacity: .28; } 100% { opacity: 1; } }
+      @keyframes svcMergeShrink { 0% { transform: scale(1); opacity: 1; } 45% { transform: scale(.965); opacity: .6; } 100% { transform: scale(1); opacity: 1; } }
+      @keyframes svcMergeAfter { 0% { opacity: 0; transform: translateX(10px); box-shadow: 0 0 0 0 rgba(0, 0, 0, 0); } 55% { opacity: 1; transform: none; box-shadow: 0 0 0 2px var(--green-soft); } 100% { opacity: 1; transform: none; box-shadow: 0 0 0 0 rgba(0, 0, 0, 0); } }
+      @keyframes svcArrowPulse { 0%, 100% { transform: scale(1); } 45% { transform: scale(1.3); } }
+      @keyframes svcBarSettle { 0% { transform: scaleY(.88); } 58% { transform: scaleY(1.035); } 100% { transform: scaleY(1); } }
+      @keyframes svcSweepWash { 0% { box-shadow: inset 0 0 0 999px rgba(255, 255, 255, 0); } 38% { box-shadow: inset 0 0 0 999px rgba(255, 255, 255, .38); } 100% { box-shadow: inset 0 0 0 999px rgba(255, 255, 255, 0); } }
+      @keyframes svcSoftPulse { 0%, 100% { background-color: rgba(0, 0, 0, 0); } 50% { background-color: var(--blue-soft); } }
+      @keyframes svcCascadeNew { from { opacity: 0; transform: translateX(-12px); } to { opacity: 1; transform: none; } }
+      @keyframes svcCaret { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+      /* 0 Data Cleanup: merge */
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="merge"] .gv-ba > div:first-child { animation: svcMergeShrink 1.05s ease .1s both; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="merge"] .gv-ba > div:first-child tbody tr { animation: svcMergeDip 1.05s ease both; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="merge"] .gv-ba > div:first-child tbody tr:nth-child(2) { animation-delay: .18s; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="merge"] .gv-ba > div:first-child tbody tr:nth-child(3) { animation-delay: .26s; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="merge"] .gv-arrow { animation: svcArrowPulse .8s ease .3s both; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="merge"] .gv-ba > div:last-child { animation: svcMergeAfter 1.1s ease .4s both; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="merge"] > .gv-note { animation: svcSigRise .4s ease 1.05s both; }
+      /* 1 Compliance & Program Reporting: checks */
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="checks"] > .gv-row { animation: svcSigRise .38s ease both; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="checks"] > .gv-row:nth-child(2) { animation-delay: .15s; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="checks"] > .gv-row:nth-child(3) { animation-delay: .3s; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="checks"] .gv-pill { animation: svcSigPop .32s ease both; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="checks"] > .gv-row:nth-child(1) .gv-pill { animation-delay: .38s; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="checks"] > .gv-row:nth-child(2) .gv-pill { animation-delay: .56s; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="checks"] > .gv-row:nth-child(3) .gv-pill { animation-delay: .74s; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="checks"] > .gv-note { animation: svcSigRise .4s ease .92s both; }
+      /* 2 Dashboards & Data Visualization: grow */
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="grow"] > .gv-kpis { animation: svcSigRise .4s ease both; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="grow"] .gv-bars i { transform-origin: bottom; animation: svcBarSettle .8s cubic-bezier(.34, 1.45, .64, 1) both; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="grow"] .gv-bars i:nth-child(2) { animation-delay: .05s; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="grow"] .gv-bars i:nth-child(3) { animation-delay: .1s; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="grow"] .gv-bars i:nth-child(4) { animation-delay: .15s; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="grow"] .gv-bars i:nth-child(5) { animation-delay: .2s; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="grow"] > .gv-note { animation: svcSigRise .4s ease .5s both; }
+      /* 3 Surveys & Data Analysis: fill */
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="fill"] > .svc-hbar { animation: svcSigRise .35s ease both; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="fill"] > .svc-hbar:nth-child(2) { animation-delay: .08s; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="fill"] > .svc-hbar:nth-child(3) { animation-delay: .16s; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="fill"] > .svc-hbar:nth-child(4) { animation-delay: .24s; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="fill"] > .gv-note { animation: svcSigRise .45s ease .95s both; }
+      /* 4 Excel & Microsoft 365 Automation: sweep */
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="sweep"] th.hl, #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="sweep"] td.hl { animation: svcSweepWash .85s ease both; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="sweep"] th.hl:nth-child(3), #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="sweep"] td.hl:nth-child(3) { animation-delay: .15s; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="sweep"] th.hl:nth-child(4), #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="sweep"] td.hl:nth-child(4) { animation-delay: .45s; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="sweep"] > .gv-note { animation: svcSigRise .4s ease .95s both; }
+      /* 5 Custom Tools & Scripts: type */
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="type"] > .formula-out { animation: none; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="type"] > .gv-row { animation: svcSigRise .35s ease both; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="type"] > .gv-row:nth-child(2) { animation-delay: .72s; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="type"] > .gv-row:nth-child(3) { animation-delay: .87s; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="type"] > .gv-row:nth-child(4) { animation-delay: 1.02s; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="type"] > .gv-note { animation: svcSigRise .35s ease 1.14s both; }
+      /* 6 Databases & Data Collection: cascade */
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="cascade"] > .gv-table { animation: none; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="cascade"] thead tr { animation: svcSigRise .3s ease both; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="cascade"] tbody tr { animation: svcSigRise .35s ease both; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="cascade"] tbody tr:nth-child(1) { animation-delay: .12s; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="cascade"] tbody tr:nth-child(2) { animation-delay: .26s; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="cascade"] tbody tr:last-child { animation: svcCascadeNew .45s ease .58s both; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="cascade"] > .gv-note { animation: svcSigRise .4s ease .85s both; }
+      /* 7 Consulting & Hands-On Training: steps */
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="steps"] > .gv-step { animation: svcSigRise .38s ease both; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="steps"] > .gv-step:nth-child(2) { animation: svcSigRise .38s ease .25s both, svcSoftPulse .8s ease .75s 1 both; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="steps"] > .gv-step:nth-child(3) { animation-delay: .5s; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="steps"] .gv-check { animation: svcSigPop .3s ease both; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="steps"] > .gv-step:nth-child(1) .gv-check { animation-delay: .05s; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="steps"] > .gv-step:nth-child(2) .gv-check { animation-delay: .3s; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="steps"] > .gv-step:nth-child(3) .gv-check { animation-delay: .55s; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="steps"] > .gv-note { animation: svcSigRise .4s ease .95s both; }
+      /* 8 Dashboards and Reporting: stamp */
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="stamp"] > .gv-row { animation: svcSigRise .35s ease both; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="stamp"] > .gv-row:nth-child(2) { animation-delay: .12s; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="stamp"] > .gv-row:nth-child(3) { animation-delay: .24s; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="stamp"] .gv-pill { animation: svcSigStamp .45s ease both; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="stamp"] > .gv-row:nth-child(1) .gv-pill { animation-delay: .32s; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="stamp"] > .gv-row:nth-child(2) .gv-pill { animation-delay: .62s; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="stamp"] > .gv-row:nth-child(3) .gv-pill { animation-delay: .92s; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="stamp"] > .gv-note { animation: svcSigRise .4s ease 1s both; }
+      /* 9 Automations and Workflows: flow */
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="flow"] > .gv-step { animation: svcSigRise .32s ease both, svcSoftPulse .85s ease both; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="flow"] > .gv-step:nth-child(2) { animation-delay: .28s, .28s; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="flow"] > .gv-step:nth-child(3) { animation-delay: .56s, .56s; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="flow"] > .gv-step:nth-child(3) .gv-pill { animation: svcSigPop .35s ease 1.18s both; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="flow"] > .gv-note { animation: svcSigRise .4s ease 1s both; }
+      /* 10 Integrations: sync */
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="sync"] > .gv-row { animation: svcSigRise .32s ease both, svcSoftPulse .75s ease both; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="sync"] > .gv-row:nth-child(2) { animation-delay: .2s, .2s; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="sync"] > .gv-row:nth-child(3) { animation-delay: .4s, .4s; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="sync"] > .gv-row:nth-child(4) { animation-delay: .6s, .6s; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="sync"] .gv-pill { animation: svcSigPop .3s ease both; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="sync"] > .gv-row:nth-child(1) .gv-pill { animation-delay: .25s; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="sync"] > .gv-row:nth-child(2) .gv-pill { animation-delay: .45s; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="sync"] > .gv-row:nth-child(3) .gv-pill { animation-delay: .65s; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="sync"] > .gv-row:nth-child(4) .gv-pill { animation-delay: .85s; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="sync"] > .gv-note { animation: svcSigRise .4s ease 1s both; }
+      /* 11 Compliance and Deadline Reporting: deadline */
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="deadline"] > .gv-row { animation: svcSigRise .35s ease both; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="deadline"] > .gv-row:nth-child(2) { animation-delay: .14s; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="deadline"] > .gv-row:nth-child(3) { animation-delay: .28s; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="deadline"] > .gv-row:nth-child(2) .gv-pill { animation: svcSigPop .3s ease .5s both; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="deadline"] > .gv-row:nth-child(3) .gv-pill { animation: svcSigPop .3s ease .64s both; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="deadline"] > .gv-row:nth-child(1) .gv-pill.bad { animation: svcSigStamp .45s ease 1.02s both; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="deadline"] > .gv-note { animation: svcSigRise .4s ease 1.1s both; }
+      /* 12 Training and Ongoing Upkeep: checklist */
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="checklist"] > .gv-row { animation: svcSigRise .35s ease both; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="checklist"] > .gv-row:nth-child(2) { animation-delay: .18s; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="checklist"] > .gv-row:nth-child(3) { animation-delay: .36s; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="checklist"] .gv-pill { animation: svcSigPop .3s ease both; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="checklist"] > .gv-row:nth-child(1) .gv-pill { animation-delay: .42s; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="checklist"] > .gv-row:nth-child(3) .gv-pill { animation-delay: .62s; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="checklist"] > .gv-row:nth-child(2) .gv-pill { animation-delay: .92s; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="checklist"] > .gv-note { animation: svcSigRise .4s ease 1.05s both; }
+      /* 13 Formula Help: formula */
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="formula"] > .gv-ask { animation: svcSigRise .35s ease both; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="formula"] > .formula-out { animation: none; }
+      #serviceExplorer .explorer-panel.svc-anim .svc-work-body[data-anim="formula"] > .gv-note { animation: svcSigRise .4s ease 1.02s both; }
+      /* typewriter caret (class added by JS only while typing) */
+      #serviceExplorer .formula-out.typing::after { content: ""; display: inline-block; width: 7px; height: 12px; margin-left: 3px; background: currentColor; vertical-align: -1px; animation: svcCaret .55s steps(1) infinite; }
+      @media (prefers-reduced-motion: reduce) {
+        #serviceExplorer .svc-work-body[data-anim] *, #serviceExplorer .svc-work-body[data-anim] { animation: none !important; }
+        #serviceExplorer .formula-out.typing::after { animation: none; }
+      }
+      /* AI Agents get views: signature motion (mirrors the Services svc-anim pattern; keyframes svcSigRise, svcSigPop, svcBarSettle, svcSigStamp, svcMergeShrink, svcMergeDip, svcMergeAfter, svcArrowPulse are defined above) */
+      .prod-panel .gv-bars i, .prod-panel .gv-minibars i { transition: height .55s ease; }
+      /* generic: view children stagger fade and rise once per selection */
+      .prod-panel.prod-anim .get-view .gv-body > * { animation: svcSigRise .38s ease both; }
+      .prod-panel.prod-anim .get-view .gv-body > *:nth-child(2) { animation-delay: .12s; }
+      .prod-panel.prod-anim .get-view .gv-body > *:nth-child(3) { animation-delay: .24s; }
+      .prod-panel.prod-anim .get-view .gv-body > *:nth-child(4) { animation-delay: .36s; }
+      .prod-panel.prod-anim .get-view .gv-table tbody tr { animation: svcSigRise .38s ease both; }
+      .prod-panel.prod-anim .get-view .gv-table tbody tr:nth-child(2) { animation-delay: .14s; }
+      /* Builds: before rows merge into the clean after state */
+      .prod-panel.prod-anim .get-view[data-anim="merge"] .gv-ba > div:first-child { animation: svcMergeShrink 1.05s ease .1s both; }
+      .prod-panel.prod-anim .get-view[data-anim="merge"] .gv-ba > div:first-child tbody tr { animation: svcMergeDip 1.05s ease both; }
+      .prod-panel.prod-anim .get-view[data-anim="merge"] .gv-ba > div:first-child tbody tr:nth-child(2) { animation-delay: .18s; }
+      .prod-panel.prod-anim .get-view[data-anim="merge"] .gv-arrow { animation: svcArrowPulse .8s ease .3s both; }
+      .prod-panel.prod-anim .get-view[data-anim="merge"] .gv-ba > div:last-child { animation: svcMergeAfter 1.1s ease .4s both; }
+      .prod-panel.prod-anim .get-view[data-anim="merge"] .gv-note { animation: svcSigRise .4s ease 1.05s both; }
+      /* Dashboards and Reporting: dashboard boots, bars settle (heights and KPI count ups run in JS) */
+      .prod-panel.prod-anim .get-view[data-anim="grow"] .gv-bars i { transform-origin: bottom; animation: svcBarSettle .8s cubic-bezier(.34, 1.45, .64, 1) both; }
+      .prod-panel.prod-anim .get-view[data-anim="grow"] .gv-bars i:nth-child(2) { animation-delay: .05s; }
+      .prod-panel.prod-anim .get-view[data-anim="grow"] .gv-bars i:nth-child(3) { animation-delay: .1s; }
+      .prod-panel.prod-anim .get-view[data-anim="grow"] .gv-bars i:nth-child(4) { animation-delay: .15s; }
+      .prod-panel.prod-anim .get-view[data-anim="grow"] .gv-bars i:nth-child(5) { animation-delay: .2s; }
+      /* Integrations: a pulse travels down the chain, each Synced pill pops behind it */
+      .prod-panel.prod-anim .get-view[data-anim="sync"] .gv-row { animation: svcSigRise .38s ease both; }
+      .prod-panel.prod-anim .get-view[data-anim="sync"] .gv-row:nth-child(2) { animation-delay: .15s; }
+      .prod-panel.prod-anim .get-view[data-anim="sync"] .gv-row:nth-child(3) { animation-delay: .3s; }
+      .prod-panel.prod-anim .get-view[data-anim="sync"] .gv-row:nth-child(4) { animation-delay: .45s; }
+      .prod-panel.prod-anim .get-view[data-anim="sync"] .gv-pill { animation: svcSigPop .32s ease both; }
+      .prod-panel.prod-anim .get-view[data-anim="sync"] .gv-row:nth-child(1) .gv-pill { animation-delay: .34s; }
+      .prod-panel.prod-anim .get-view[data-anim="sync"] .gv-row:nth-child(2) .gv-pill { animation-delay: .52s; }
+      .prod-panel.prod-anim .get-view[data-anim="sync"] .gv-row:nth-child(3) .gv-pill { animation-delay: .7s; }
+      .prod-panel.prod-anim .get-view[data-anim="sync"] .gv-row:nth-child(4) .gv-pill { animation-delay: .88s; }
+      .prod-panel.prod-anim .get-view[data-anim="sync"] .gv-note { animation: svcSigRise .4s ease 1s both; }
+      /* Compliance: rows settle, Ready pills pop early, the missing certificate stamps in last */
+      .prod-panel.prod-anim .get-view[data-anim="deadline"] .gv-row { animation: svcSigRise .38s ease both; }
+      .prod-panel.prod-anim .get-view[data-anim="deadline"] .gv-row:nth-child(2) { animation-delay: .15s; }
+      .prod-panel.prod-anim .get-view[data-anim="deadline"] .gv-row:nth-child(3) { animation-delay: .3s; }
+      .prod-panel.prod-anim .get-view[data-anim="deadline"] .gv-pill.ok { animation: svcSigPop .32s ease both; }
+      .prod-panel.prod-anim .get-view[data-anim="deadline"] .gv-row:nth-child(1) .gv-pill { animation-delay: .36s; }
+      .prod-panel.prod-anim .get-view[data-anim="deadline"] .gv-row:nth-child(3) .gv-pill { animation-delay: .6s; }
+      .prod-panel.prod-anim .get-view[data-anim="deadline"] .gv-pill.bad { animation: svcSigStamp .45s cubic-bezier(.2, .7, .3, 1) .85s both; }
+      @media (prefers-reduced-motion: reduce) {
+        .prod-panel.prod-anim .get-view, .prod-panel.prod-anim .get-view * { animation: none !important; }
+        .prod-panel .gv-bars i, .prod-panel .gv-minibars i { transition: none; }
+      }
