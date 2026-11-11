@@ -603,7 +603,7 @@
       button.logo-cell.active { border-color: var(--blue); box-shadow: 0 0 0 2px var(--blue-soft); }
       .logo-cell img { height: 42px; width: auto; max-width: 82%; object-fit: contain; display: block; }
       .logo-cell img.wide { height: auto; max-height: 30px; width: 92%; }
-      .logo-cell span { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.25; }
+      .logo-cell span { font-size: 13px; font-weight: 700; color: #12263f; line-height: 1.25; }
       .outcome-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 1px solid var(--line); background: var(--panel); border-radius: 14px; overflow: hidden; }
       .outcome { padding: 24px 22px; border-right: 1px solid var(--line); }
       .outcome:last-child { border-right: 0; }
